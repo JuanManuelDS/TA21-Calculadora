@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -51,7 +53,7 @@ public class Calculadora extends JFrame {
 		
 		// Creo el panel que contendrá los botones con número y operaciones
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setBounds(10, 76, 245, 221);
+		buttonsPanel.setBounds(10, 76, 245, 179);
 		buttonsPanel.setLayout(new GridLayout(4, 5, 0, 0));
 
 		// Creo los BOTONES
@@ -101,7 +103,7 @@ public class Calculadora extends JFrame {
 		equalsLAbel.setBounds(164, 25, 26, 25);
 
 		// Label que indicará la operación
-		JLabel operationLabel = new JLabel("o");
+		JLabel operationLabel = new JLabel("");
 		operationLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		operationLabel.setBounds(77, 25, 26, 25);
 
@@ -137,10 +139,41 @@ public class Calculadora extends JFrame {
 		//Evento botón resolver
 		buttons[14].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				resolver();
+				try {
+					resolver();
+				} catch (NullPointerException | NumberFormatException ex) {
+					JOptionPane.showMessageDialog(contentPane, "Asegurate de haber ingresado los números en ambas casillas y seleccionado la operación");
+				} 
+				
+				
 			}
 		});
 
+		/*---------- LIMPIAR/BORRAR PANEL Y BOTONES ---------*/
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 266, 245, 31);
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(1, 2, 0, 0));
+		
+		JButton cleanButton = new JButton("Limpiar");
+		cleanButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		cleanButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				input1 = "";
+				input2 ="";
+				operacion = "";
+				operationLabel.setText("");
+				input1Textfield.setText(input1);
+				input2Textfield.setText(input2);
+				resultTextfield.setText("");
+			}
+		});
+		panel.add(cleanButton);
+		
+		JButton deleteButton = new JButton("Borrar");
+		deleteButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel.add(deleteButton);
+		
 		/*--------ADICIONES AL CONTENT PANE ---------------*/
 		contentPane.add(buttonsPanel);
 		contentPane.add(input1Textfield);
@@ -196,7 +229,4 @@ public class Calculadora extends JFrame {
 	public String getInputText2() {
 		return input2Textfield.getText();
 	}
-	
-	
-	
 }
