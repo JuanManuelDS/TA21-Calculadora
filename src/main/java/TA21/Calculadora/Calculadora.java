@@ -152,14 +152,14 @@ public class Calculadora extends JFrame {
 		setVisible(true);
 	}
 	
-	private void resolver() {
+	public void resolver() {
 		double a = Double.parseDouble(input1);
 		double b = Double.parseDouble(input2);
 		resultado = calculos.calcular(a, b, operacion);
 		resultTextfield.setText(resultado + "");
 	}
 
-	private void setInput(String input) {
+	public void setInput(String input) {
 		if (input1Focus) {
 			input1 += input;
 			input1Textfield.setText(input1);
@@ -168,4 +168,35 @@ public class Calculadora extends JFrame {
 			input2Textfield.setText(input2);
 		}
 	}
+	
+	public void setInput1(String inp) {
+		input1 = inp;
+	}
+	
+	public void setInput2(String inp) {
+		input2 = inp;
+	}
+	
+	public void setOperacion(String op) {
+		operacion = op;
+	}
+	
+	public void setInput1Focus(boolean bool) {
+		input1Focus = bool;
+	}
+	
+	public double getResultado() {
+		return resultado;
+	}
+	
+	public String getInputText1() {
+		return input1Textfield.getText();
+	}
+	
+	public String getInputText2() {
+		return input2Textfield.getText();
+	}
+	
+	
+	
 }
