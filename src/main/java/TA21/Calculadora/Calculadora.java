@@ -127,6 +127,7 @@ public class Calculadora extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						JButton botonPresionado = (JButton) e.getSource();
 						operacion = botonPresionado.getText();
+						operationLabel.setText(operacion);
 						input1Focus = false;
 					}
 				});
