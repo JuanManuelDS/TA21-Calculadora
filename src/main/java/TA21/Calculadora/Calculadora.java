@@ -175,10 +175,15 @@ public class Calculadora extends JFrame {
 		//Borro el útimo dígito del input al clickear borrar
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				input1 = input1.substring(0, input1.length()-1);
-				input2 = input2.substring(0, input2.length()-1);
-				input1Textfield.setText(input1);
-				input2Textfield.setText(input2);
+				if(input1Focus) {
+					input1 = input1.substring(0, input1.length()-1);
+					input1Textfield.setText(input1);
+				} else {
+					input2 = input2.substring(0, input2.length()-1);
+					input2Textfield.setText(input2);
+				}
+				
+				
 			}
 		});
 		deleteButton.setFont(new Font("Tahoma", Font.BOLD, 14));
